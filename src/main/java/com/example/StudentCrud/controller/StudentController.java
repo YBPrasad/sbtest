@@ -3,50 +3,42 @@ package com.example.StudentCrud.controller;
 import com.example.StudentCrud.domain.Student;
 import com.example.StudentCrud.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
     @Autowired
     private StudentService service;
 
-    @GetMapping("/")
-    public String viewHomePage(Model model){
-        List<Student> listStudent=service.listAll();
-        model.addAttribute("liststudent",listStudent);
-        System.out.println("Get /");
-        return "index";
+    //get all students
+    @GetMapping
+    public List<Student> getAll(){
+        return this.service.listAll();
+    }
+    //get student by id
+    @GetMapping("/{id}")
+    public Student getUser(@PathVariable (value="id") long studentID){
+        return this.service.getUserById(studentID);
+    }
+    //save student
+    @PostMapping
+    public Student saveUser(@RequestBody Student std){
+        return this.service.save(std);
+    }
+    //update student
+    @PutMapping("/{id}")
+    public Student updateStudent(@RequestBody Student std,@PathVariable (value="id") long userId){
+        return this.service.updateStudent(std,userId);
+    }
+    //delete student
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable (value="id") long userId){
+        return this.service.delete(userId);
     }
 
-    @GetMapping("/new")
-    public String add(Model model){
-        model.addAttribute("student",new Student());
-        return "new";
-    }
-
-    @RequestMapping(value="/save",method= RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("student") Student std){
-        service.save(std);
-        return "redirect:/";
-    }
-
-    @RequestMapping("/edit/{id}")
-    public ModelAndView showEditStudentPage(@PathVariable(name="id") int id){
-        ModelAndView mav=new ModelAndView("new");
-        Student std=service.get(id);
-        mav.addObject("student",std);
-        return  mav;
-    }
-
-    @RequestMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable(name="id") int id){
-        service.delete(id);
-        return "redirect:/";
-    }
 }

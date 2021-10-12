@@ -1,32 +1,36 @@
 package com.example.StudentCrud.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="students")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String studentname;
+
+    @Column(name="studentName")
+    private String studentName;
+
+    @Column(name="course")
     private String course;
+
+    @Column(name="fee")
     private int fee;
 
     public Student(){
 
     }
 
-    public Student(Long id, String studentname, String course, int fee) {
+    public Student(Long id, String studentName, String course, int fee) {
         this.id = id;
-        this.studentname = studentname;
+        this.studentName = studentName;
         this.course = course;
         this.fee = fee;
     }
 
-    public void setStudentname(String studentname) {
-        this.studentname = studentname;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public void setCourse(String course) {
@@ -36,9 +40,12 @@ public class Student {
     public void setFee(int fee) {
         this.fee = fee;
     }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getStudentname() {
-        return studentname;
+    public String getStudentName() {
+        return studentName;
     }
 
     public String getCourse() {
@@ -49,11 +56,6 @@ public class Student {
         return fee;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
     public Long getId() {
         return id;
     }
