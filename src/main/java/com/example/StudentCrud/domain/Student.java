@@ -3,14 +3,14 @@ package com.example.StudentCrud.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="students")
+@Table(name="student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="studentName")
-    private String studentName;
+    @Column(name="student_name")
+    private String student_name;
 
     @Column(name="course")
     private String course;
@@ -24,13 +24,13 @@ public class Student {
 
     public Student(Long id, String studentName, String course, int fee) {
         this.id = id;
-        this.studentName = studentName;
+        this.student_name = studentName;
         this.course = course;
         this.fee = fee;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
     }
 
     public void setCourse(String course) {
@@ -44,8 +44,8 @@ public class Student {
         this.id = id;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getStudent_name() {
+        return student_name;
     }
 
     public String getCourse() {

@@ -39,7 +39,7 @@ public class StudentService {
 
     public Student updateStudent(Student std,long id){
         Student existingStudent=this.repo.findById(id).orElseThrow(()->new ResourceAccessException("Student not found with this id "+id));
-        existingStudent.setStudentName(std.getStudentName());
+        existingStudent.setStudent_name(std.getStudent_name());
         existingStudent.setCourse(std.getCourse());
         existingStudent.setFee(std.getFee());
         return this.repo.save(existingStudent);
