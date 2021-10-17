@@ -10,9 +10,9 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String number_of_student;
+    private int number_of_student;
 
-    public Course(Long id, String name, String number_of_student) {
+    public Course(Long id, String name, int number_of_student) {
         this.id = id;
         this.name = name;
         this.number_of_student = number_of_student;
@@ -30,7 +30,7 @@ public class Course {
         this.name = name;
     }
 
-    public void setNumber_of_student(String number_of_student) {
+    public void setNumber_of_student(int number_of_student) {
         this.number_of_student = number_of_student;
     }
 
@@ -42,7 +42,7 @@ public class Course {
         return name;
     }
 
-    public String getNumber_of_student() {
+    public int getNumber_of_student() {
         return number_of_student;
     }
 }
