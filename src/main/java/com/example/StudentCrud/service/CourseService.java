@@ -23,17 +23,17 @@ public class CourseService {
         return this.repo.save(crs);
     }
 
-    public Course getCourseById(Long id){
+    public Course getCourseById(long id){
         return this.repo.findById(id).orElseThrow(()->new ResourceAccessException("Course not found by this id"+id));
     }
 
-    public ResponseEntity<Course> deleteById(Long id){
+    public ResponseEntity<Course> deleteById(long id){
         Course existingCrs=this.repo.findById(id).orElseThrow(()->new ResourceAccessException("Course not found by this id"+id));
         this.repo.delete(existingCrs);
         return ResponseEntity.ok().build();
     }
 
-    public Course updateCourse(Course crs,Long id){
+    public Course updateCourse(Course crs,long id){
         Course existingCrs=this.repo.findById(id).orElseThrow(()->new ResourceAccessException("Course not found by this id"+id));
         existingCrs.setName(crs.getName());
         existingCrs.setNumber_of_student(crs.getNumber_of_student());
